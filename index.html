@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OLY MOLY | Hardware Rack & DSP Audio Studio</title>
+    <title>OLY MOLY | Coming Soon</title>
     <style>
         :root {
             --bg-rack: #090b0e;
             --panel-bg: #12161f;
             --panel-border: #242b3d;
-            --panel-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 20px rgba(0,0,0,0.6);
+            --panel-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 30px rgba(0,0,0,0.8);
             --led-green: #00ff88;
-            --led-amber: #ffb400;
             --accent-cyan: #00d2ff;
             --text-main: #e6edf3;
-            --text-muted: #8b949e;
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
         }
 
@@ -24,285 +22,116 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-rack);
             background-image: 
-                radial-gradient(circle at 50% 0%, #1a2233 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, #1a2233 0%, transparent 70%),
                 linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
             background-size: 100% 100%, 100% 4px;
             color: var(--text-main);
-            line-height: 1.6;
-            padding: 30px 15px;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        .rack-case {
-            max-width: 900px;
-            margin: 0 auto;
+        /* Hardware Rack Unit Centered */
+        .rack-unit {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
             border-left: 12px solid #1c222d;
             border-right: 12px solid #1c222d;
-            padding: 0 15px;
-            position: relative;
-        }
-
-        /* DAW Transport & Console Header */
-        header.daw-header {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
             border-radius: 6px;
-            padding: 20px 25px;
+            padding: 45px 50px;
             box-shadow: var(--panel-shadow);
-            margin-bottom: 30px;
             position: relative;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
         }
 
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--panel-border);
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-        }
-
-        .site-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-
-        .power-led {
+        /* Hardware Screws */
+        .screw {
+            position: absolute;
             width: 10px;
             height: 10px;
-            background-color: var(--led-green);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--led-green);
-        }
-
-        .site-title {
-            color: #ffffff;
-            font-size: 1.8rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            font-family: var(--font-mono);
-        }
-
-        .daw-status-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            background: #080a0d;
-            border: 1px solid #1b212c;
-            padding: 10px 15px;
-            border-radius: 4px;
-            font-family: var(--font-mono);
-            font-size: 0.82rem;
-            color: var(--accent-cyan);
-        }
-
-        .status-item {
-            display: flex;
-            gap: 6px;
-        }
-
-        .status-item span.label { color: var(--text-muted); }
-
-        /* Rack Section Headings */
-        .rack-label {
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            letter-spacing: 1.5px;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .rack-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--panel-border);
-        }
-
-        /* Hardware Rack Modules (Post Cards) */
-        .modules-list {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .rack-module {
-            background: var(--panel-bg);
-            border: 1px solid var(--panel-border);
-            border-radius: 6px;
-            padding: 25px;
-            box-shadow: var(--panel-shadow);
-            position: relative;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-
-        .rack-module:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-cyan);
-        }
-
-        /* Rack Screw Details */
-        .rack-module::before, .rack-module::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
             background: #2a3346;
             border-radius: 50%;
             border: 1px solid #12161f;
             box-shadow: inset 0 1px 1px rgba(0,0,0,0.8);
         }
-        .rack-module::before { top: 10px; left: 10px; }
-        .rack-module::after { top: 10px; right: 10px; }
+        .screw.top-left { top: 12px; left: -8px; }
+        .screw.top-right { top: 12px; right: -8px; }
+        .screw.bottom-left { bottom: 12px; left: -8px; }
+        .screw.bottom-right { bottom: 12px; right: -8px; }
 
-        .module-header {
+        /* Title & Power LED */
+        .brand-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            margin-bottom: 12px;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 25px;
         }
 
-        .module-tags {
-            display: flex;
-            gap: 8px;
+        .power-led {
+            width: 12px;
+            height: 12px;
+            background-color: var(--led-green);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--led-green);
+            animation: pulse 2s infinite alternate;
         }
 
-        .tag {
-            font-family: var(--font-mono);
-            font-size: 0.72rem;
-            padding: 2px 8px;
-            border-radius: 3px;
-            background: #1a2233;
-            color: var(--accent-cyan);
-            border: 1px solid #2a364f;
+        @keyframes pulse {
+            0% { opacity: 0.6; box-shadow: 0 0 6px var(--led-green); }
+            100% { opacity: 1; box-shadow: 0 0 16px var(--led-green); }
         }
 
-        .tag.signal { color: var(--led-amber); border-color: #4a3810; background: #241a08; }
-
-        .module-title {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-        }
-
-        .module-title a {
+        .site-title {
             color: #ffffff;
-            text-decoration: none;
-            transition: color 0.2s;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            font-family: var(--font-mono);
         }
 
-        .module-title a:hover {
+        /* Digital Screen Subtitle */
+        .status-display {
+            background: #080a0d;
+            border: 1px solid #1b212c;
+            border-radius: 4px;
+            padding: 14px 20px;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+        }
+
+        .subtitle {
             color: var(--accent-cyan);
-        }
-
-        .module-description {
-            color: var(--text-muted);
-            font-size: 0.96rem;
-            margin-bottom: 18px;
-        }
-
-        .module-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #1c2333;
-            padding-top: 12px;
             font-family: var(--font-mono);
-            font-size: 0.82rem;
-        }
-
-        .read-btn {
-            color: var(--led-green);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .read-btn:hover {
-            text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
-        }
-
-        footer {
-            border-top: 1px solid var(--panel-border);
-            padding-top: 20px;
-            text-align: center;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--text-muted);
+            font-size: 1.1rem;
+            letter-spacing: 6px;
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <div class="rack-case">
-        
-        <!-- DAW Console Header -->
-        <header class="daw-header">
-            <div class="header-top">
-                <a href="index.html" class="site-brand">
-                    <div class="power-led"></div>
-                    <span class="site-title">OLY MOLY</span>
-                </a>
-                <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">
-                    CONSOLE v2.6 // CAKEWALK SONAR
-                </span>
-            </div>
+    <div class="rack-unit">
+        <!-- Hardware Corner Screws -->
+        <div class="screw top-left"></div>
+        <div class="screw top-right"></div>
+        <div class="screw bottom-left"></div>
+        <div class="screw bottom-right"></div>
 
-            <!-- DAW Status / Project Transport Readout -->
-            <div class="daw-status-bar">
-                <div class="status-item"><span class="label">KEY:</span> AI Assissted Music Composition</div>
-                <div class="status-item"><span class="label">BPM:</span> 132.00</div>
-                <div class="status-item"><span class="label">MONITORING:</span> Read - Discover - Implement</div>
-                <div class="status-item"><span class="label">OUT:</span> -10.0 dBFS</div>
-            </div>
-        </header>
+        <!-- Title Header -->
+        <div class="brand-header">
+            <div class="power-led"></div>
+            <h1 class="site-title">OLY MOLY</h1>
+        </div>
 
-        <!-- Main Rack Content -->
-        <main>
-            <div class="rack-label">// RACK MODULES - LATEST ARTICLES</div>
-
-            <div class="modules-list">
-                
-                <!-- Article Module 1 -->
-                <article class="rack-module">
-                    <div class="module-header">
-                        <div class="module-tags">
-                            <span class="tag">[ORIGINS]</span>
-                            <span class="tag signal">[History Of Music]</span>
-                        </div>
-                        <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted);">
-                            SEP 2026
-                        </span>
-                    </div>
-
-                    <h2 class="module-title">
-                        <a href="headphone-vs-monitors.html">How was music invented?</a>
-                    </h2>
-
-                    <p class="module-description">
-                        Looking back at possible origins of music
-                    </p>
-
-                    <div class="module-footer">
-                        <span style="color: var(--text-muted);">READ TIME: 4 MIN</span>
-                        <a href="headphone-vs-monitors.html" class="read-btn">EXECUTE MODULE →</a>
-                    </div>
-                </article>
-
-            </div>
-        </main>
-
-        <footer>
-            <p>OLY MOLY AUDIO DSP & TECHNO LAB // HOSTED VIA GITHUB PAGES</p>
-        </footer>
-
+        <!-- Digital LED Subtitle -->
+        <div class="status-display">
+            <div class="subtitle">// COMING SOON</div>
+        </div>
     </div>
 
 </body>
